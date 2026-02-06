@@ -2,95 +2,161 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+/* Krishi Mitra - Smart Agriculture Assistant Design System
+   Earth-inspired, farmer-friendly, accessible */
+
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* Core palette - Earthy, trustworthy, natural */
+    --background: 45 30% 97%;
+    --foreground: 25 30% 12%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card: 45 25% 99%;
+    --card-foreground: 25 30% 12%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover: 45 25% 99%;
+    --popover-foreground: 25 30% 12%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    /* Primary - Deep Forest Green (growth, trust) */
+    --primary: 132 50% 24%;
+    --primary-foreground: 45 30% 97%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    /* Secondary - Warm Terracotta (earth, grounding) */
+    --secondary: 25 45% 92%;
+    --secondary-foreground: 25 35% 25%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    /* Muted - Soft sage */
+    --muted: 90 15% 92%;
+    --muted-foreground: 90 10% 40%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    /* Accent - Golden Wheat (harvest, success) */
+    --accent: 42 85% 55%;
+    --accent-foreground: 25 35% 15%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    /* Destructive - Warm red (not alarming) */
+    --destructive: 0 65% 50%;
+    --destructive-foreground: 45 30% 97%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    /* UI elements */
+    --border: 90 20% 88%;
+    --input: 90 20% 88%;
+    --ring: 132 50% 24%;
 
-    --radius: 0.5rem;
+    --radius: 1rem;
 
-    --sidebar-background: 0 0% 98%;
+    /* Semantic colors for agriculture */
+    --success: 142 60% 40%;
+    --success-foreground: 45 30% 97%;
+    --warning: 38 92% 50%;
+    --warning-foreground: 25 35% 15%;
+    --info: 200 80% 50%;
+    --info-foreground: 45 30% 97%;
 
-    --sidebar-foreground: 240 5.3% 26.1%;
+    /* Severity indicators */
+    --severity-low: 142 60% 45%;
+    --severity-medium: 42 85% 55%;
+    --severity-high: 0 65% 50%;
 
-    --sidebar-primary: 240 5.9% 10%;
+    /* Soil type colors */
+    --soil-alluvial: 35 60% 70%;
+    --soil-clay: 20 50% 45%;
+    --soil-sandy: 45 70% 80%;
+    --soil-loamy: 30 45% 55%;
+    --soil-black: 0 0% 25%;
 
-    --sidebar-primary-foreground: 0 0% 98%;
+    /* Gradients */
+    --gradient-hero: linear-gradient(135deg, hsl(132 50% 24%) 0%, hsl(142 45% 35%) 100%);
+    --gradient-accent: linear-gradient(135deg, hsl(42 85% 55%) 0%, hsl(35 80% 50%) 100%);
+    --gradient-card: linear-gradient(180deg, hsl(45 25% 99%) 0%, hsl(45 30% 96%) 100%);
+    --gradient-soil: linear-gradient(135deg, hsl(25 45% 40%) 0%, hsl(30 50% 50%) 100%);
 
-    --sidebar-accent: 240 4.8% 95.9%;
+    /* Shadows */
+    --shadow-sm: 0 2px 8px -2px hsl(25 30% 12% / 0.08);
+    --shadow-md: 0 8px 24px -8px hsl(25 30% 12% / 0.12);
+    --shadow-lg: 0 16px 48px -12px hsl(25 30% 12% / 0.18);
+    --shadow-glow: 0 0 40px -10px hsl(132 50% 24% / 0.3);
 
-    --sidebar-accent-foreground: 240 5.9% 10%;
-
-    --sidebar-border: 220 13% 91%;
-
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    /* Sidebar (matching theme) */
+    --sidebar-background: 45 30% 97%;
+    --sidebar-foreground: 25 30% 12%;
+    --sidebar-primary: 132 50% 24%;
+    --sidebar-primary-foreground: 45 30% 97%;
+    --sidebar-accent: 90 15% 92%;
+    --sidebar-accent-foreground: 25 30% 12%;
+    --sidebar-border: 90 20% 88%;
+    --sidebar-ring: 132 50% 24%;
   }
 
   .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
+    /* Dark mode - Night farming, reduced eye strain */
+    --background: 25 25% 10%;
+    --foreground: 45 20% 92%;
 
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
+    --card: 25 20% 14%;
+    --card-foreground: 45 20% 92%;
 
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
+    --popover: 25 20% 14%;
+    --popover-foreground: 45 20% 92%;
 
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
+    /* Primary - Lighter forest green for dark mode */
+    --primary: 142 45% 45%;
+    --primary-foreground: 25 25% 10%;
 
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
+    /* Secondary - Darker terracotta */
+    --secondary: 25 30% 20%;
+    --secondary-foreground: 45 20% 85%;
 
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
+    /* Muted */
+    --muted: 25 20% 18%;
+    --muted-foreground: 45 15% 60%;
 
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
+    /* Accent - Golden wheat (slightly muted) */
+    --accent: 42 75% 50%;
+    --accent-foreground: 25 25% 10%;
 
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 55% 45%;
+    --destructive-foreground: 45 20% 92%;
 
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --border: 25 20% 22%;
+    --input: 25 20% 22%;
+    --ring: 142 45% 45%;
+
+    /* Semantic colors for dark mode */
+    --success: 142 55% 45%;
+    --success-foreground: 25 25% 10%;
+    --warning: 42 80% 55%;
+    --warning-foreground: 25 25% 10%;
+    --info: 200 70% 55%;
+    --info-foreground: 25 25% 10%;
+
+    /* Severity (brighter in dark mode) */
+    --severity-low: 142 55% 50%;
+    --severity-medium: 42 80% 60%;
+    --severity-high: 0 60% 55%;
+
+    /* Gradients for dark mode */
+    --gradient-hero: linear-gradient(135deg, hsl(142 45% 35%) 0%, hsl(142 40% 25%) 100%);
+    --gradient-accent: linear-gradient(135deg, hsl(42 75% 50%) 0%, hsl(35 70% 45%) 100%);
+    --gradient-card: linear-gradient(180deg, hsl(25 20% 14%) 0%, hsl(25 25% 12%) 100%);
+    --gradient-soil: linear-gradient(135deg, hsl(25 35% 30%) 0%, hsl(30 40% 40%) 100%);
+
+    /* Shadows for dark mode */
+    --shadow-sm: 0 2px 8px -2px hsl(0 0% 0% / 0.3);
+    --shadow-md: 0 8px 24px -8px hsl(0 0% 0% / 0.4);
+    --shadow-lg: 0 16px 48px -12px hsl(0 0% 0% / 0.5);
+    --shadow-glow: 0 0 40px -10px hsl(142 45% 45% / 0.4);
+
+    /* Sidebar dark */
+    --sidebar-background: 25 25% 10%;
+    --sidebar-foreground: 45 20% 92%;
+    --sidebar-primary: 142 45% 45%;
+    --sidebar-primary-foreground: 25 25% 10%;
+    --sidebar-accent: 25 20% 18%;
+    --sidebar-accent-foreground: 45 20% 92%;
+    --sidebar-border: 25 20% 22%;
+    --sidebar-ring: 142 45% 45%;
   }
 }
 
@@ -99,7 +165,182 @@ All colors MUST be HSL.
     @apply border-border;
   }
 
+  html {
+    scroll-behavior: smooth;
+  }
+
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-sans antialiased;
+    font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  }
+
+  /* Typography scale */
+  h1 {
+    @apply text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight;
+  }
+
+  h2 {
+    @apply text-3xl md:text-4xl font-bold tracking-tight;
+  }
+
+  h3 {
+    @apply text-2xl md:text-3xl font-semibold;
+  }
+
+  h4 {
+    @apply text-xl md:text-2xl font-semibold;
+  }
+
+  /* Focus styles for accessibility */
+  :focus-visible {
+    @apply outline-none ring-2 ring-ring ring-offset-2 ring-offset-background;
+  }
+}
+
+@layer utilities {
+  /* Custom animations */
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  .animate-pulse-soft {
+    animation: pulse-soft 3s ease-in-out infinite;
+  }
+
+  .animate-slide-up {
+    animation: slide-up 0.5s ease-out;
+  }
+
+  .animate-fade-in {
+    animation: fade-in 0.5s ease-out;
+  }
+
+  .animate-scale-in {
+    animation: scale-in 0.3s ease-out;
+  }
+
+  .animate-shimmer {
+    animation: shimmer 2s linear infinite;
+  }
+
+  /* Gradient text */
+  .text-gradient-primary {
+    @apply bg-clip-text text-transparent;
+    background-image: var(--gradient-hero);
+  }
+
+  .text-gradient-accent {
+    @apply bg-clip-text text-transparent;
+    background-image: var(--gradient-accent);
+  }
+
+  /* Background patterns */
+  .bg-grid-pattern {
+    background-image: 
+      linear-gradient(to right, hsl(var(--border)) 1px, transparent 1px),
+      linear-gradient(to bottom, hsl(var(--border)) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+
+  .bg-dots-pattern {
+    background-image: radial-gradient(hsl(var(--muted-foreground) / 0.15) 1px, transparent 1px);
+    background-size: 20px 20px;
+  }
+
+  /* Glass effect */
+  .glass {
+    @apply bg-card/80 backdrop-blur-xl;
+  }
+
+  /* Severity badges */
+  .severity-low {
+    @apply bg-[hsl(var(--severity-low))] text-white;
+  }
+
+  .severity-medium {
+    @apply bg-[hsl(var(--severity-medium))] text-[hsl(25_35%_15%)];
+  }
+
+  .severity-high {
+    @apply bg-[hsl(var(--severity-high))] text-white;
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes pulse-soft {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+@keyframes slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-muted rounded-full;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-muted-foreground/30 rounded-full hover:bg-muted-foreground/50;
+}
+
+/* Print styles */
+@media print {
+  body {
+    @apply bg-white text-black;
   }
 }
