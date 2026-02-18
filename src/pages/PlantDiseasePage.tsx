@@ -9,7 +9,7 @@ import { DiseaseResultCard, Severity } from '@/components/DiseaseResultCard';
 import { useLanguage } from '@/contexts/LanguageContext';
 
 // Simulated disease results
-const mockDiseaseResults = [
+/*const mockDiseaseResults = [
   {
     diseaseName: 'Late Blight',
     confidence: 92,
@@ -61,15 +61,25 @@ const mockDiseaseResults = [
       'Maintain soil organic matter',
     ],
   },
-];
+];*/
+
+type DiseaseResultType = {
+  diseaseName: string;
+  confidence: number;
+  severity: Severity;
+  treatment: string[];
+  prevention: string[];
+};
+
 
 const PlantDiseasePage = () => {
   const { t } = useLanguage();
   const navigate = useNavigate();
   const [isAnalyzing, setIsAnalyzing] = useState(false);
-  const [result, setResult] = useState<typeof mockDiseaseResults[0] | null>(null);
+  const [result, setResult] = useState<DiseaseResultType | null>(null);
+  //const [result, setResult] = useState<typeof mockDiseaseResults[0] | null>(null);
 
-  const handleImageSelect = (file: File) => {
+  /*const handleImageSelect = (file: File) => {
     setIsAnalyzing(true);
     
     // Simulate AI analysis
@@ -78,7 +88,55 @@ const PlantDiseasePage = () => {
       setResult(randomResult);
       setIsAnalyzing(false);
     }, 2500);
-  };
+  };*/
+
+
+  const handleImageSelect = async (file: File) => {
+  setIsAnalyzing(true);
+
+  const formData = new FormData();
+  formData.append("image", file);
+
+  try {
+    const response = await fetch("http://127.0.0.1:5000/predict", {
+      method: "POST",
+      body: formData,
+    });
+
+    const data = await response.json();
+
+    if (data.success) {
+      const prediction = data.topPrediction;
+
+      // Format disease name nicely
+      const formattedName = prediction.disease
+        .replace(/___/g, " - ")
+        .replace(/_/g, " ");
+
+      setResult({
+        diseaseName: formattedName,
+        confidence: prediction.confidence,
+        severity:
+          prediction.confidence > 80
+            ? "high"
+            : prediction.confidence > 50
+            ? "medium"
+            : "low",
+        treatment: ["Consult agricultural expert for proper treatment."],
+        prevention: ["Monitor plant regularly and maintain good hygiene."],
+      });
+    } else {
+      alert("Prediction failed");
+    }
+  } catch (error) {
+    console.error("Error:", error);
+    alert("Backend connection failed");
+  }
+
+  setIsAnalyzing(false);
+};
+
+
 
   const handleAskAI = () => {
     navigate('/chat', { state: { context: result?.diseaseName } });
