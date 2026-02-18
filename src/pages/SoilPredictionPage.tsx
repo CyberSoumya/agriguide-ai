@@ -9,7 +9,7 @@ import { SoilResultCard } from '@/components/SoilResultCard';
 import { useLanguage } from '@/contexts/LanguageContext';
 
 // Simulated soil results
-const mockSoilResults = [
+/*const mockSoilResults = [
   {
     soilType: 'Alluvial Soil',
     characteristics: 'Rich in potash, phosphoric acid, and lime. Very fertile and suitable for a wide variety of crops. Found in river plains and deltas.',
@@ -61,23 +61,74 @@ const mockSoilResults = [
       'Mulching helps retain moisture',
     ],
   },
-];
+];*/
+
+type SoilResultType = {
+  soilType: string;
+  characteristics: string;
+  waterRetention: "Low" | "Medium" | "High";
+  fertility: "Low" | "Medium" | "High";
+  recommendedCrops: string[];
+  fertilizerTips: string[];
+  irrigationTips: string[];
+};
 
 const SoilPredictionPage = () => {
   const { t } = useLanguage();
   const navigate = useNavigate();
   const [isAnalyzing, setIsAnalyzing] = useState(false);
-  const [result, setResult] = useState<typeof mockSoilResults[0] | null>(null);
+  const [result, setResult] = useState<SoilResultType | null>(null);
+  // const [result, setResult] = useState<typeof mockSoilResults[0] | null>(null);
 
-  const handleImageSelect = (file: File) => {
+  /*const handleImageSelect = (file: File) => {
     setIsAnalyzing(true);
-    
+
     // Simulate AI analysis
     setTimeout(() => {
       const randomResult = mockSoilResults[Math.floor(Math.random() * mockSoilResults.length)];
       setResult(randomResult);
       setIsAnalyzing(false);
     }, 2500);
+  };*/
+
+  const handleImageSelect = async (file: File) => {
+    setIsAnalyzing(true);
+
+    const formData = new FormData();
+    formData.append("image", file);
+
+    try {
+      const response = await fetch("http://127.0.0.1:5000/predict-soil", {
+        method: "POST",
+        body: formData,
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        const prediction = data.topPrediction;
+
+        const formattedName = prediction.soilType
+          .replace(/_/g, " ");
+
+        setResult({
+          soilType: formattedName,
+          characteristics: "AI detected soil type based on texture analysis.",
+          waterRetention: "Medium",
+          fertility: "Medium",
+          recommendedCrops: ["Based on soil type"],
+          fertilizerTips: ["Consult soil lab for nutrient testing."],
+          irrigationTips: ["Use appropriate irrigation based on soil type."],
+        });
+      } else {
+        alert("Prediction failed");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      alert("Backend connection failed");
+    }
+
+    setIsAnalyzing(false);
   };
 
   const handleAskAI = () => {
@@ -98,12 +149,12 @@ const SoilPredictionPage = () => {
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
-      
+
       <main className="flex-1">
         {/* Hero */}
         <section className="relative py-12 md:py-16 overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-b from-secondary/20 to-transparent" />
-          
+
           <div className="container relative">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -145,7 +196,9 @@ const SoilPredictionPage = () => {
                     <div className="p-6 rounded-2xl bg-secondary/30 border border-border">
                       <div className="flex items-center gap-2 mb-4">
                         <Lightbulb className="h-5 w-5 text-accent" />
-                        <h3 className="font-semibold text-foreground">Tips for Best Results</h3>
+                        <h3 className="font-semibold text-foreground">
+                          Tips for Best Results
+                        </h3>
                       </div>
                       <ul className="space-y-3">
                         {tips.map((tip, index) => (
