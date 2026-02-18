@@ -14,9 +14,7 @@ CORS(app)
 # LOAD PLANT MODEL
 # ======================================================
 print("Loading plant model...")
-plant_model = tf.keras.models.load_model(
-    r"D:\SFP\agriguide-ai-main\trained_model.keras"
-)
+plant_model = tf.keras.models.load_model("trained_model.keras")
 print("Plant model loaded ✅")
 
 plant_classes = [
@@ -149,3 +147,4 @@ def predict_soil():
 
 if __name__ == "__main__":
     app.run(debug=True)
+
